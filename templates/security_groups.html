@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Rules</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>Security Rules Management</h1>
+<nav>
+    <a href="/dashboard">Dashboard</a> |
+    <a href="/assets">Assets</a> |
+    <a href="/vpcs">VPCs</a> |
+    <a href="/security_groups">Security Rules</a> |
+    <a href="/alerts">Alerts</a> |
+    <a href="/logs">Logs</a>
+</nav>
+<hr>
+<h2>Add Security Rule</h2>
+<form action="/add_rule" method="POST">
+    <label>Port:</label><br>
+    <input type="number" name="port" required><br><br>
+    <label>Protocol:</label><br>
+    <select name="protocol">
+        <option>TCP</option>
+        <option>UDP</option>
+    </select><br><br>
+    <label>Action:</label><br>
+    <select name="action">
+        <option>ALLOW</option>
+        <option>DENY</option>
+    </select><br><br>
+    <button type="submit">Add Rule</button>
+</form>
+<hr>
+<h2>Security Rules List</h2>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Port</th>
+        <th>Protocol</th>
+        <th>Action</th>
+    </tr>
+    {% for rule in rules %}
+    <tr>
+        <td>{{ rule[0] }}</td>
+        <td>{{ rule[1] }}</td>
+        <td>{{ rule[2] }}</td>
+        <td>{{ rule[3] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

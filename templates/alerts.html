@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Alerts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>Security Alerts</h1>
+<nav>
+    <a href="/dashboard">Dashboard</a> |
+    <a href="/assets">Assets</a> |
+    <a href="/vpcs">VPCs</a> |
+    <a href="/security_groups">Security Rules</a> |
+    <a href="/alerts">Alerts</a> |
+    <a href="/logs">Logs</a>
+</nav>
+<hr>
+<h2>Add Alert</h2>
+<form action="/add_alert" method="POST">
+    <label>Alert Message:</label><br>
+    <input type="text" name="message" required><br><br>
+    <label>Severity:</label><br>
+    <select name="severity">
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+        <option>Critical</option>
+    </select><br><br>
+    <button type="submit">Add Alert</button>
+</form>
+<hr>
+<h2>Alert List</h2>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Message</th>
+        <th>Severity</th>
+    </tr>
+    {% for alert in alerts %}
+    <tr>
+        <td>{{ alert[0] }}</td>
+        <td>{{ alert[1] }}</td>
+        <td>{{ alert[2] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

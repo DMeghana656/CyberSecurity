@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VPC Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>VPC Management</h1>
+<nav>
+    <a href="/dashboard">Dashboard</a> |
+    <a href="/assets">Assets</a> |
+    <a href="/vpcs">VPCs</a> |
+    <a href="/security_groups">Security Rules</a> |
+    <a href="/alerts">Alerts</a> |
+    <a href="/logs">Logs</a>
+</nav>
+<hr>
+<h2>Add VPC</h2>
+<form action="/add_vpc" method="POST">
+    <label>VPC Name:</label><br>
+    <input type="text" name="vpc_name" required><br><br>
+    <label>Subnet:</label><br>
+    <input type="text" name="subnet" required><br><br>
+    <button type="submit">Add VPC</button>
+</form>
+<hr>
+<h2>VPC List</h2>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>VPC Name</th>
+        <th>Subnet</th>
+    </tr>
+    {% for vpc in vpcs %}
+    <tr>
+        <td>{{ vpc[0] }}</td>
+        <td>{{ vpc[1] }}</td>
+        <td>{{ vpc[2] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
